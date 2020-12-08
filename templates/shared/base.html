@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+<header>
+    <nav>
+        <ul>
+            <li>
+                <a href="#">Home</a>
+            </li>
+            {% if user.is_authenticated %}
+            <li>
+                {{ user.username }}
+                <a href="{% url 'logout user' %}">Logout</a>
+            </li>
+
+            {% else %}
+            <li>
+                <a href="{% url 'signup user' %}">Register</a>
+            </li>
+            <li>
+                <a href="{% url 'signin user' %}">Login</a>
+            </li>
+            {% endif %}
+        </ul>
+    </nav>
+</header>
+
+{% block site_content %}
+{% endblock %}
+
+</body>
+</html>
