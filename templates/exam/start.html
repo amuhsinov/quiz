@@ -1,0 +1,22 @@
+{% extends 'shared/base.html' %}
+
+{% block site_content %}
+
+<h2>Start exam</h2>
+
+    <form action="">
+    <div class="question">
+    {% for question in questions %}
+        <p>{{ question.question }}</p>
+            {% for choice in choices %}
+                {% if choice.fk_question_id.id == question.id %}
+                    <label for="{{ choice.id }}"><input id="{{ choice.id }}" type="radio" name="{{ question.id }}" value="{{ choice.id }}">{{ choice.choice }}</label>
+                {% endif %}
+            {% endfor %}
+        <br>
+    {% endfor %}
+    </div>
+    <button>Submit</button>
+    </form>
+
+{% endblock %}

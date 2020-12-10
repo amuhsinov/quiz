@@ -1,12 +1,19 @@
 from django.contrib.auth import login, logout, authenticate
-from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-
 from accounts.forms import UserRegisterForm, UserLoginForm
+from django.contrib.auth.models import User
 
 
+@login_required
 def user_profile(request):
-    return render(request, 'accounts/profile.html')
+    user = request.user
+    if request.method == 'GET':
+        context = {
+            'user': user,
+        }
+
+        return render(request, 'accounts/profile.html', context)
 
 
 def get_redirect_url(params):
@@ -23,8 +30,12 @@ def signin_user(request):
         return render(request, 'accounts/signin.html', context)
     else:
         login_form = UserLoginForm(request.POST)
+        has_next = request.GET.get('next')
 
-        return_url = get_redirect_url(request.POST)
+        if has_next:
+            return_url = has_next
+        else:
+            return_url = get_redirect_url(request.POST)
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']
@@ -59,7 +70,7 @@ def signup_user(request):
 
         context = {
             'form': form,
-        }
+        } 
 
         return render(request, 'accounts/signup.html', context)
 

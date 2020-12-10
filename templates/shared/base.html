@@ -11,21 +11,27 @@
     <nav>
         <ul>
             <li>
-                <a href="#">Home</a>
+                <a href="{% url 'index' %}">Home</a>
             </li>
             {% if user.is_authenticated %}
-            <li>
-                {{ user.username }}
-                <a href="{% url 'logout user' %}">Logout</a>
-            </li>
+                <li>
+                    <a href="{% url 'start exam' %}">Exam</a>
+                </li>
+                <li>
+                    <a href="{% url 'user profile' %}">Profile</a>
+                </li>
+                <li>
+                    {{ user.username }}
+                    <a href="{% url 'logout user' %}">Logout</a>
+                </li>
 
             {% else %}
-            <li>
-                <a href="{% url 'signup user' %}">Register</a>
-            </li>
-            <li>
-                <a href="{% url 'signin user' %}">Login</a>
-            </li>
+                <li>
+                    <a href="{% url 'signup user' %}">Register</a>
+                </li>
+                <li>
+                    <a href="{% url 'signin user' %}">Login</a>
+                </li>
             {% endif %}
         </ul>
     </nav>
