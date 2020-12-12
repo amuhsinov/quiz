@@ -8,5 +8,21 @@
     <hr>
 
     <p>Последни резултати</p>
+    <table border="1">
+        <tr>
+            <td>точки</td>
+            <td>брой въпроси</td>
+        </tr>
+        {% for result in results %}
+            <tr>
+            <td>
+            {{ result.result }}
+            </td>
+            <td>
+            {{ result.questions_count }}
+            </td>
+            </tr>
+        {% endfor %}
+    </table>
 
 {% endblock %}

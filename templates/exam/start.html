@@ -4,15 +4,18 @@
 
 <h2>Start exam</h2>
 
-    <form action="">
+    <form action="{% url 'exam result' %}" method="POST">
+    {% csrf_token %}
     <div class="question">
     {% for question in questions %}
         <p>{{ question.question }}</p>
+        <fieldset name="question">
             {% for choice in choices %}
                 {% if choice.fk_question_id.id == question.id %}
-                    <label for="{{ choice.id }}"><input id="{{ choice.id }}" type="radio" name="{{ question.id }}" value="{{ choice.id }}">{{ choice.choice }}</label>
+                    <label for="q_{{ choice.id }}"><input type="radio" name="q_{{ question.id }}" value="{{ choice.id }}">{{ choice.choice }}</label>
                 {% endif %}
             {% endfor %}
+        </fieldset>
         <br>
     {% endfor %}
     </div>

@@ -15,4 +15,5 @@ class Choice(models.Model):
 class Result(models.Model):
     fk_user_id = models.ForeignKey(User, on_delete=models.CASCADE)
     result = models.IntegerField()
+    questions_count = models.IntegerField(default=0)
     date = models.DateField()

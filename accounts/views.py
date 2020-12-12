@@ -4,13 +4,17 @@ from django.shortcuts import render, redirect
 from accounts.forms import UserRegisterForm, UserLoginForm
 from django.contrib.auth.models import User
 
+from exam.models import Result
+
 
 @login_required
 def user_profile(request):
     user = request.user
     if request.method == 'GET':
+
         context = {
             'user': user,
+            'results': Result.objects.filter(fk_user_id=user.id),
         }
 
         return render(request, 'accounts/profile.html', context)
