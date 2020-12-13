@@ -2,19 +2,23 @@
 
 {% block site_content %}
 
-<h2>Коли</h2>
-
-    {% for car in cars %}
-        {% if car.car %}
-        <div>
-            <p><a href="{% url 'car detail' car.id %}">{{ car.name }}</a></p>
-
-                <img src="{{ car.car.url }}" style="width: 150px; height: 150px;">
-
-            <p>{{ car.fk_user_id.username }}</p>
-
-        </div>
-        {% endif %}
-    {% endfor %}
+    <h2 class="m-5">Успешно завършили курсисти се хвалят с първите си коли. :)</h2>
+    <div class="row">
+        {% for car in cars %}
+            {% if car.car %}
+                <div class="col-sm-6">
+                    <div class="card">
+                        <img class="card-img-top" src="{{ car.car.url }}" class="img-fluid" alt="Car" width="460"
+                             height="345">
+                        <div class="card-body">
+                            <h4 class="card-title"><a href="{% url 'car detail' car.id %}">{{ car.name }}</a></h4>
+                            <p class="card-text">Потребител: {{ car.fk_user_id.username }}</p>
+                            <a href="{% url 'car detail' car.id %}" class="btn btn-primary">Детайли</a>
+                        </div>
+                    </div>
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
 
 {% endblock %}

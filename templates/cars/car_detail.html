@@ -2,18 +2,26 @@
 
 {% block site_content %}
 
-<h2>Кола</h2>
-
-        <div>
-        <p><a href="#">{{ car.name }}</a></p>
-        <img src="{{ car.car.url }}" style="width: 150px; height: 150px;">
-        <p>{{ car.fk_user_id.username }}</p>
-        {% if car.fk_user_id.id == user.id %}
-            <form action="{% url 'delete car' car.id %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">Изтрий</button>
-            </form>
+    <h2 class="m-5 text-center">Колата на {{ car.fk_user_id.username }}</h2>
+    <div class="row text-center">
+        {% if car.car %}
+            <div class="col-sm-6 ">
+                <div class="card">
+                    <img class="card-img-top" src="{{ car.car.url }}" class="img-fluid" alt="Car" width="460"
+                         height="345">
+                    <div class="card-body">
+                        <h4 class="card-title"><a href="{% url 'car detail' car.id %}">{{ car.name }}</a></h4>
+                        <p class="card-text">Потребител: {{ car.fk_user_id.username }}</p>
+                        {% if car.fk_user_id.id == user.id %}
+                            <form action="{% url 'delete car' car.id %}" method="POST">
+                                {% csrf_token %}
+                                <button type="submit">Изтрий</button>
+                            </form>
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
         {% endif %}
-        </div>
+    </div>
 
 {% endblock %}

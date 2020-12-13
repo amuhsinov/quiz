@@ -9,13 +9,11 @@
     <div class="question">
     {% for question in questions %}
         <p>{{ question.question }} - {{ question.id }}</p>
-        <fieldset name="question">
             {% for choice in choices %}
                 {% if choice.fk_question_id.id == question.id %}
                     <label for="q_{{ choice.id }}"><input type="radio" name="q_{{ question.id }}" value="{{ choice.id }}">{{ choice.choice }}</label>
                 {% endif %}
             {% endfor %}
-        </fieldset>
         <br>
     {% endfor %}
     </div>
