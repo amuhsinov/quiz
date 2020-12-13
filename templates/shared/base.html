@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Листовки</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
@@ -11,26 +11,29 @@
     <nav>
         <ul>
             <li>
-                <a href="{% url 'index' %}">Home</a>
+                <a href="{% url 'index' %}">Начало</a>
+            </li>
+            <li>
+                <a href="{% url 'cars' %}">Коли</a>
             </li>
             {% if user.is_authenticated %}
                 <li>
-                    <a href="{% url 'start exam' %}">Exam</a>
+                    <a href="{% url 'start exam' %}">Изпит</a>
                 </li>
                 <li>
-                    <a href="{% url 'user profile' %}">Profile</a>
+                    <a href="{% url 'user profile' %}">Профил</a>
                 </li>
                 <li>
                     {{ user.username }}
-                    <a href="{% url 'logout user' %}">Logout</a>
+                    <a href="{% url 'logout user' %}">Изход</a>
                 </li>
 
             {% else %}
                 <li>
-                    <a href="{% url 'signup user' %}">Register</a>
+                    <a href="{% url 'signup user' %}">Регистрация</a>
                 </li>
                 <li>
-                    <a href="{% url 'signin user' %}">Login</a>
+                    <a href="{% url 'signin user' %}">Вход</a>
                 </li>
             {% endif %}
         </ul>

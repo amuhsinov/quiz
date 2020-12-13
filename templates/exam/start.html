@@ -2,13 +2,13 @@
 
 {% block site_content %}
 
-<h2>Start exam</h2>
+<h2>Изпит</h2>
 
     <form action="{% url 'exam result' %}" method="POST">
     {% csrf_token %}
     <div class="question">
     {% for question in questions %}
-        <p>{{ question.question }}</p>
+        <p>{{ question.question }} - {{ question.id }}</p>
         <fieldset name="question">
             {% for choice in choices %}
                 {% if choice.fk_question_id.id == question.id %}
@@ -19,7 +19,7 @@
         <br>
     {% endfor %}
     </div>
-    <button>Submit</button>
+    <button>Предай</button>
     </form>
 
 {% endblock %}

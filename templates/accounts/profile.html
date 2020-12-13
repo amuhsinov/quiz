@@ -2,8 +2,16 @@
 
 {% block site_content %}
 <h2>Профил</h2>
-
+{% load static %}
 {{ user.username }}
+    <hr>
+
+    {% if car %}
+        {{ car.name }}
+        {% if car.car %}
+            <img src="{{ car.car.url }}" style="width: 150px; height: 150px;">
+        {% endif %}
+    {% endif %}
 
     <hr>
 
@@ -24,5 +32,15 @@
             </tr>
         {% endfor %}
     </table>
+    <hr>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        {% if car.car %}
+            <button type="submit">Обнови</button>
+        {% else %}
+            <button type="submit">Качи</button>
+        {% endif %}
+    </form>
 
 {% endblock %}

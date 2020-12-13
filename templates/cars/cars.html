@@ -1,0 +1,20 @@
+{% extends 'shared/base.html' %}
+
+{% block site_content %}
+
+<h2>Коли</h2>
+
+    {% for car in cars %}
+        {% if car.car %}
+        <div>
+            <p><a href="{% url 'car detail' car.id %}">{{ car.name }}</a></p>
+
+                <img src="{{ car.car.url }}" style="width: 150px; height: 150px;">
+
+            <p>{{ car.fk_user_id.username }}</p>
+
+        </div>
+        {% endif %}
+    {% endfor %}
+
+{% endblock %}

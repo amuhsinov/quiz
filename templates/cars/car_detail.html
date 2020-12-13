@@ -1,0 +1,19 @@
+{% extends 'shared/base.html' %}
+
+{% block site_content %}
+
+<h2>Кола</h2>
+
+        <div>
+        <p><a href="#">{{ car.name }}</a></p>
+        <img src="{{ car.car.url }}" style="width: 150px; height: 150px;">
+        <p>{{ car.fk_user_id.username }}</p>
+        {% if car.fk_user_id.id == user.id %}
+            <form action="{% url 'delete car' car.id %}" method="POST">
+                {% csrf_token %}
+                <button type="submit">Изтрий</button>
+            </form>
+        {% endif %}
+        </div>
+
+{% endblock %}
