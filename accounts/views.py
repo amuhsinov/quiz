@@ -44,11 +44,6 @@ def user_profile(request):
         return render(request, 'accounts/profile.html')
 
 
-def get_redirect_url(params):
-    redirect_url = params.get('return_url')
-    return redirect_url if redirect_url else 'index'
-
-
 def signin_user(request):
     if request.method == 'GET':
         context = {
@@ -63,7 +58,7 @@ def signin_user(request):
         if has_next:
             return_url = has_next
         else:
-            return_url = get_redirect_url(request.POST)
+            return_url = 'user profile'
         if login_form.is_valid():
             username = login_form.cleaned_data['username']
             password = login_form.cleaned_data['password']

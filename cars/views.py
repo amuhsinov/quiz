@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 
 from cars.models import Car
@@ -23,8 +24,9 @@ def get_cars(request):
         return render(request, 'cars/cars.html', context)
 
 
+@login_required
 def delete_car(request, car_id):
     if request.method == 'POST':
         Car.objects.filter(id=car_id).update(car='', name='')
-        return redirect('cars')
+        return redirect('user profile')
 
